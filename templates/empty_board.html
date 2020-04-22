@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
     <title>Scrabble</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    {% block head %}{% endblock %}
   </head>
   <body>
     <table id="box-table-b">
@@ -629,7 +630,7 @@
           <td width="70" height="70">&nbsp;</td>
           <td width="70" height="70">&nbsp;</td>
           <td width="70" height="70">
-            <div id="BoardBlock"><span id="burst-8"></span></div>
+            <div id="StartBlock"></div>
           </td>
           <td width="70" height="70">&nbsp;</td>
           <td width="70" height="70">&nbsp;</td>
@@ -1209,82 +1210,6 @@
         </tr>
       </thead>
     </table>
-    <table width="1050" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td>
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 357px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">S</span>
-            <span class="ScrabbleNumber">1</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 358px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">C</span>
-            <span class="ScrabbleNumber">3</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 359px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">R</span>
-            <span class="ScrabbleNumber">1</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 360px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">A</span>
-            <span class="ScrabbleNumber">1</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 361px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">B</span>
-            <span class="ScrabbleNumber">3</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 362px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">B</span>
-            <span class="ScrabbleNumber">3</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 363px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">L</span>
-            <span class="ScrabbleNumber">1</span>
-          </div>
-
-          <div
-            id="ScrabbleBlock"
-            style="position: relative; left: 364px; top: -660px; width: 70px;"
-            onmousedown="dragStart(event)"
-          >
-            <span class="ScrabbleLetter">E</span>
-            <span class="ScrabbleNumber">1</span>
-          </div>
-        </td>
-      </tr>
-    </table>
+    {% block body %}{% endblock %}
   </body>
 </html>
