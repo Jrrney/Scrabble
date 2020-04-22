@@ -12,13 +12,26 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
 
+class Game:
+    board = [[[]for _ in range(15)] for _ in range(15)]
+    number_of_players = 0
+    current_player = 0
+    racks = [[]]
+
+    def import_board(self, file):
+        self.board = list(csv.reader(
+            open(file)))
+
+
 @app.route("/", methods=['POST', 'GET'])
 def startGame():
     if request.method == "POST":
         pass
     else:
-        return render_template('testing.html', posX=90, posY=90)
+        return render_template('testing.html', board=game.board)
 
 
 if (__name__ == "__main__"):
+    game = Game()
+    game.import_board("board.csv")
     app.run()
