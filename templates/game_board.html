@@ -11,7 +11,7 @@
           style="position: absolute; left: {{ (loop.index-1) * 76.5 + 54.5 }}px; top: {{ (outer_loop.index-1) * 75.5 + 54.5}}px; width: 70px;"
           >
           <span class="ScrabbleLetter">{{letter|upper}}</span>
-          <span class="ScrabbleNumber">1</span>
+          <span class="ScrabbleNumber">{{letter_values[letter]}}</span>
           </div>
         {%endif%}
     {% endfor %}
