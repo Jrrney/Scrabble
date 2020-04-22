@@ -1,81 +1,123 @@
-{% extends 'empty_board.html' %} {% block head %} {% endblock %} {% block body
-%}
-<table width="1050" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td>
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 357px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">S</span>
-        <span class="ScrabbleNumber">1</span>
-      </div>
+{% extends 'empty_board.html' %} {% block head %} {% endblock %} 
+  {% block body%}
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 360.5px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">S</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 358px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">C</span>
-        <span class="ScrabbleNumber">3</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 356.5px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">S</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 359px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">R</span>
-        <span class="ScrabbleNumber">1</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 437px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">C</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 360px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">A</span>
-        <span class="ScrabbleNumber">1</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 432px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">C</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 361px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">B</span>
-        <span class="ScrabbleNumber">3</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 513.5px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">R</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 362px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">B</span>
-        <span class="ScrabbleNumber">3</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 507.5px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">R</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 363px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">L</span>
-        <span class="ScrabbleNumber">1</span>
-      </div>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">A</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
 
-      <div
-        id="ScrabbleBlock"
-        style="position: relative; left: 364px; top: -660px; width: 70px;"
-        onmousedown="dragStart(event)"
-      >
-        <span class="ScrabbleLetter">E</span>
-        <span class="ScrabbleNumber">1</span>
-      </div>
-    </td>
-  </tr>
-</table>
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 666.5px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">B</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
 
-{%endblock %}
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 658.5px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">B</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 743px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">B</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 734px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">B</span>
+          <span class="ScrabbleNumber">3</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 819.5px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">L</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 809.5px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">L</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 896px; top: 583px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">E</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
+
+          <div
+          id="ScrabbleBlock"
+          style="position: absolute; left: 590px; top: 885px; width: 70px;"
+          >
+          <span class="ScrabbleLetter">E</span>
+          <span class="ScrabbleNumber">1</span>
+          </div>
+
+  {%endblock %}

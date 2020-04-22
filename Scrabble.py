@@ -28,6 +28,14 @@ def startGame():
     if request.method == "POST":
         pass
     else:
+        return render_template('starting_board.html')
+
+
+@app.route("/nextMove", methods=['POST', 'GET'])
+def nextMove():
+    if request.method == "POST":
+        pass
+    else:
         return render_template('testing.html', board=game.board)
 
 
