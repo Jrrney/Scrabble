@@ -53,8 +53,14 @@ class Game:
 
 @app.route("/", methods=['POST', 'GET'])
 def startGame():
+    global game
     if request.method == "POST":
-        pass
+        tmp = request.form['number_of_players']
+        if(tmp != ""):
+            game.number_of_players = int(tmp)
+            return redirect('/nextMove')
+        else:
+            return redirect('/')
     else:
         return render_template('starting_board.html', letter_values=game.letter_values)
 
