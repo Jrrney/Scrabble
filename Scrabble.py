@@ -17,7 +17,7 @@ def startGame():
     if request.method == "POST":
         pass
     else:
-        return render_template('testing.html')
+        return render_template('testing.html', posX=90, posY=90)
 
 
 if (__name__ == "__main__"):

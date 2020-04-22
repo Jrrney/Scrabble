@@ -1,8 +1,32 @@
 {% extends 'empty_board.html' %} {% block head %} {% endblock %} {% block body%}
+
 <div
   id="ScrabbleBlock"
-  style="position: absolute; left: 1114px; top: 50px; width: 70px;"
-  onmousedown="dragStart(event)"
+  style="position: absolute; left: {{posX}}px; top: {{posY}}px; width: 70px;"
+>
+  <span class="ScrabbleLetter">S</span>
+  <span class="ScrabbleNumber">1</span>
+</div>
+
+<div
+  id="ScrabbleBlock"
+  style="position: absolute; left: 131px; top: 54.5px; width: 70px;"
+>
+  <span class="ScrabbleLetter">S</span>
+  <span class="ScrabbleNumber">1</span>
+</div>
+
+<div
+  id="ScrabbleBlock"
+  style="position: absolute; left: 1125.5px; top: 54.5px; width: 70px;"
+>
+  <span class="ScrabbleLetter">S</span>
+  <span class="ScrabbleNumber">1</span>
+</div>
+
+<div
+  id="ScrabbleBlock"
+  style="position: absolute; left: 54.5px; top: 1111.5px; width: 70px;"
 >
   <span class="ScrabbleLetter">S</span>
   <span class="ScrabbleNumber">1</span>

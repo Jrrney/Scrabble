@@ -57,22 +57,6 @@ body {
   float: left;
   text-align: center;
   /* -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.6, transparent), to(rgba(255, 255, 255, 0.5)));*/
-  border-top-width: 1px;
-  border-right-width: 4px;
-  border-bottom-width: 4px;
-  border-left-width: 1px;
-  border-top-style: solid;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  border-left-style: solid;
-  border-top-color: #f8e6b1;
-  border-right-color: #f8e6b1;
-  border-bottom-color: #cab06b;
-  border-left-color: #f8e6b1;
-  user-select: none;
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
 }
 .BoardLetterDW {
   font-family: "Asap", serif;
