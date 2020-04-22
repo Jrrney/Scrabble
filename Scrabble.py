@@ -56,7 +56,7 @@ def startGame():
     if request.method == "POST":
         pass
     else:
-        return render_template('game_board.html', board=game.board, letter_values=game.letter_values)
+        return render_template('starting_board.html', letter_values=game.letter_values)
 
 
 @app.route("/nextMove", methods=['POST', 'GET'])
