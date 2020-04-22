@@ -132,14 +132,6 @@ body {
   box-shadow: inset 0px 0px 5px #acacac;
 }
 
-#StartBlock {
-  background-color: #f8bdb4;
-  height: 70px;
-  width: 70px;
-  -moz-box-shadow: inset 0px 3px 5px #acacac;
-  -webkit-box-shadow: inset 0px 3px 5px #acacac;
-  box-shadow: inset 0px 0px 5px #acacac;
-}
 #box-table-b {
   width: 1050px;
   border-collapse: collapse;
