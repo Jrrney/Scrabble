@@ -16,4 +16,17 @@
         {%endif%}
     {% endfor %}
 {% endfor %}
+
+
+        <div class="form"
+          style="position: absolute; left: 1410px; top: 80px;">
+            <form action="/nextMove" method="POST">
+              <center>
+                Current player: Player {{current_player}}
+                <br>
+                <br>
+                <input type="submit" value="Commit your move">
+              </center>
+            </form>
+        </div>
 {%endblock %}

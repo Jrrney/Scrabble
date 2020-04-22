@@ -50,6 +50,12 @@ class Game:
         self.board = list(csv.reader(
             open(file)))
 
+    def nextMove(self):
+        self.current_player += 1
+
+        if(self.current_player > self.number_of_players):
+            self.current_player = 1
+
 
 @app.route("/", methods=['POST', 'GET'])
 def startGame():
@@ -58,6 +64,7 @@ def startGame():
         tmp = request.form['number_of_players']
         if(tmp != ""):
             game.number_of_players = int(tmp)
+            game.nextMove()
             return redirect('/nextMove')
         else:
             return redirect('/')
@@ -67,10 +74,12 @@ def startGame():
 
 @app.route("/nextMove", methods=['POST', 'GET'])
 def nextMove():
+    global game
     if request.method == "POST":
-        pass
+        game.nextMove()
+        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player)
     else:
-        return render_template('game_board.html', board=game.board, letter_values=game.letter_values)
+        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player)
 
 
 if (__name__ == "__main__"):
