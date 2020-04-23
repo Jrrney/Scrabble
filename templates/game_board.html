@@ -1,5 +1,58 @@
 
-{% extends 'empty_board.html' %} {% block head %} {% endblock %} {% block body%}
+{% extends 'empty_board.html' %} 
+{% block head %} 
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+    var tile = {
+      letter: "-",
+      left : 0,
+      top  : 0
+    };
+    
+    var tiles= new Array(7)
+    for (var i = 0; i < tiles.length; i++) { 
+      tiles[i] = new Array(3); 
+      tiles[i][0] = "-"
+      tiles[i][1] = 0
+      tiles[i][2] = 0
+      } 
+    function drag_start(event) {
+        var style = window.getComputedStyle(event.target, null);
+        var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY) + ',' + event.target.id;
+        event.dataTransfer.setData("Text", str);
+    }
+
+    function drop(event) {
+        var offset = event.dataTransfer.getData("Text").split(',');
+        var dm = document.getElementById(offset[2]);
+
+        tiles[offset[2][2]-1][0]=offset[2][0];
+        tiles[offset[2][2]-1][1]=(event.clientX + parseInt(offset[0], 10));
+        tiles[offset[2][2]-1][2]=(event.clientY + parseInt(offset[1], 10));
+
+        
+
+        dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+        dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+       
+        event.preventDefault();
+        return false;
+    }
+
+    function drag_over(event) {
+        event.preventDefault();
+        return false;
+    }
+
+    function getTilesInput(event) {
+      var request = new XMLHttpRequest()
+      request.open("POST","/nextMove", true)
+      var send_data = "Hello World"
+      request.send(send_data)
+    }
+  </script> 
+{% endblock %} 
+{% block body%}
 
 <!-- All tiles from the previous plays -->
 
@@ -19,25 +72,26 @@
 {% endfor %}
 
 <!-- Move commit interface -->
+<script>
+  $(document).ready(function(){
+    $("button").click(function(){
+      $.post("/nextMove",
+      JSON.stringify(tiles),
+      function(data,status){
+        alert("Data: " + data + "\nStatus: " + status);
+      });
+    });
+  });
+  </script>
 
-        <div class="form"
-          style="position: absolute; left: 1410px; top: 80px;">
-            <form action="/nextMove" method="POST">
-              <center>
-                Current player: Player {{current_player}}
-                <br>
-                <br>
-                <input type="submit" value="Commit your move">
-              </center>
-            </form>
-        </div>
+        <button>PLS</button>
         
 
 <!-- Player racks -->    
           {% for letter in racks[current_player] %}
               {%if letter != '-' %}
                     <div
-                    id="{{'letter'+loop.index|string}}"
+                    id="{{letter+'_'+loop.index|string}}"
                     class="ScrabbleBlock"
                     style="position: absolute; left:1449px; top: {{ (loop.index-1) * 80 + 200}}px; width: 70px;"
                     draggable="true" ondragstart="drag_start(event)"

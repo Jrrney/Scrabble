@@ -88,6 +88,8 @@ def nextMove():
     global game
     if request.method == "POST":
         game.fill_racks()
+        data = request.get_data()
+        print(data)
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
     else:
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
