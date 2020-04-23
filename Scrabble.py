@@ -46,11 +46,20 @@ class Game:
         "z": 10,
     }
 
+    def fill_racks(self):
+        self.next_move()
+        if(self.racks == [[]]):
+            for j in range(self.number_of_players):
+                rack = []
+                for i in range(7):
+                    rack.append(random.choice(string.ascii_lowercase))
+                self.racks.append(rack)
+
     def import_board(self, file):
         self.board = list(csv.reader(
             open(file)))
 
-    def nextMove(self):
+    def next_move(self):
         self.current_player += 1
 
         if(self.current_player > self.number_of_players):
@@ -60,11 +69,13 @@ class Game:
 @app.route("/", methods=['POST', 'GET'])
 def startGame():
     global game
+    if(game.number_of_players != 0):
+        return redirect('/nextMove')
     if request.method == "POST":
         tmp = request.form['number_of_players']
         if(tmp != ""):
             game.number_of_players = int(tmp)
-            game.nextMove()
+            game.fill_racks()
             return redirect('/nextMove')
         else:
             return redirect('/')
@@ -76,13 +87,14 @@ def startGame():
 def nextMove():
     global game
     if request.method == "POST":
-        game.nextMove()
-        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player)
+        game.fill_racks()
+        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
     else:
-        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player)
+        return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
 
 
 if (__name__ == "__main__"):
     game = Game()
-    game.import_board("board.csv")
+    game.board = [['-'for _ in range(15)] for _ in range(15)]
+    # game.import_board("board.csv")
     app.run()

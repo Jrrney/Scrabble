@@ -1,6 +1,7 @@
 
 {% extends 'empty_board.html' %} {% block head %} {% endblock %} {% block body%}
 
+<!-- All tiles from the previous plays -->
 
 {% for row in board %}
     {% set outer_loop = loop %}
@@ -17,6 +18,7 @@
     {% endfor %}
 {% endfor %}
 
+<!-- Move commit interface -->
 
         <div class="form"
           style="position: absolute; left: 1410px; top: 80px;">
@@ -29,4 +31,18 @@
               </center>
             </form>
         </div>
+
+
+<!-- Player racks -->    
+          {% for letter in racks[current_player] %}
+              {%if letter != '-' %}
+                    <div
+                    id="ScrabbleBlock"
+                    style="position: absolute; left:1449px; top: {{ (loop.index-1) * 80 + 200}}px; width: 70px;"
+                    >
+                    <span class="ScrabbleLetter">{{letter|upper}}</span>
+                    <span class="ScrabbleNumber">{{letter_values[letter]}}</span>
+                    </div>
+              {%endif%}
+          {% endfor %}    
 {%endblock %}

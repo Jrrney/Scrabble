@@ -2,13 +2,7 @@
 /* CSS Document */
 
 body {
-  background: -webkit-gradient(
-    linear,
-    100% 100%,
-    0% 5%,
-    from(#f4f4f4),
-    to(#e0e0e0)
-  );
+  background: #e0e0e0;
   margin: 0px;
   margin-left: 0px;
   margin-top: 0px;
