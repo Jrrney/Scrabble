@@ -96,5 +96,5 @@ def nextMove():
 if (__name__ == "__main__"):
     game = Game()
     game.board = [['-'for _ in range(15)] for _ in range(15)]
-    # game.import_board("board.csv")
+    game.import_board("board.csv")
     app.run()

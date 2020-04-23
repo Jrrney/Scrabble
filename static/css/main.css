@@ -31,7 +31,7 @@ body {
   -webkit-user-select: none;
   -khtml-user-select: none;
 }
-#ScrabbleBlock {
+.ScrabbleBlock {
   background-color: #f6e1a6;
   background: -webkit-gradient(
     linear,

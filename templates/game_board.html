@@ -8,7 +8,7 @@
     {% for letter in row %}
         {%if letter != '-' %}
           <div
-          id="ScrabbleBlock"
+          class="ScrabbleBlock"
           style="position: absolute; left: {{ (loop.index-1) * 76.5 + 54.5 }}px; top: {{ (outer_loop.index-1) * 75.5 + 54.5}}px; width: 70px;"
           >
           <span class="ScrabbleLetter">{{letter|upper}}</span>
@@ -31,18 +31,21 @@
               </center>
             </form>
         </div>
-
+        
 
 <!-- Player racks -->    
           {% for letter in racks[current_player] %}
               {%if letter != '-' %}
                     <div
-                    id="ScrabbleBlock"
+                    id="{{'letter'+loop.index|string}}"
+                    class="ScrabbleBlock"
                     style="position: absolute; left:1449px; top: {{ (loop.index-1) * 80 + 200}}px; width: 70px;"
+                    draggable="true" ondragstart="drag_start(event)"
                     >
                     <span class="ScrabbleLetter">{{letter|upper}}</span>
                     <span class="ScrabbleNumber">{{letter_values[letter]}}</span>
                     </div>
               {%endif%}
-          {% endfor %}    
+          {% endfor %}  
+          
 {%endblock %}

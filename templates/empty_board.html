@@ -11,28 +11,34 @@
     <title>Scrabble</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script>
-      function allowDrop(ev) {
-        ev.preventDefault();
+      function drag_start(event) {
+          var style = window.getComputedStyle(event.target, null);
+          var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY) + ',' + event.target.id;
+          event.dataTransfer.setData("Text", str);
       }
-      
-      function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
+
+      function drop(event) {
+          var offset = event.dataTransfer.getData("Text").split(',');
+          var dm = document.getElementById(offset[2]);
+          dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+          dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+          event.preventDefault();
+          return false;
       }
-      
-      function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
+
+      function drag_over(event) {
+          event.preventDefault();
+          return false;
       }
-      </script>
+    </script> 
     {% block head %}{% endblock %}
   </head>
-  <body>
+  <body ondragover="drag_over(event)" ondrop="drop(event)">
     <table id="box-table-b">
       <thead>
         <tr>
           <td width="70" height="70">
-            <div id="BoardBlock" style="background: #d72421;">
+            <div id="BoardBlock" style="background: #d72421; ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
               <span class="BoardLetterTW">TW</span
               ><span
                 class="arrow-right"
@@ -55,7 +61,7 @@
           <td width="70" height="70">&nbsp;</td>
           <td width="70" height="70">&nbsp;</td>
           <td width="70" height="70">
-            <div id="BoardBlock" style="background: #6fe6f6;">
+            <div id="BoardBlock" style="background: #6fe6f6;ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
               <span class="BoardLetterDL">DL</span
               ><span
                 class="arrow-right"
