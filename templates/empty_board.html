@@ -7,8 +7,24 @@
       type="text/css"
     />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='Scrabble.ico') }}"/>
     <title>Scrabble</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+      
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+      </script>
     {% block head %}{% endblock %}
   </head>
   <body>
