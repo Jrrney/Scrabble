@@ -74,11 +74,12 @@ def startGame():
     if request.method == "POST":
         tmp = request.form['number_of_players']
         if(tmp != ""):
-            game.number_of_players = int(tmp)
-            game.fill_racks()
-            return redirect('/nextMove')
-        else:
-            return redirect('/')
+            number = int(tmp)
+            if(number > 0):
+                game.number_of_players = number
+                game.fill_racks()
+                return redirect('/nextMove')
+        return redirect('/')
     else:
         return render_template('starting_board.html', letter_values=game.letter_values)
 

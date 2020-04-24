@@ -25,15 +25,17 @@
     function drop(event) {
         var offset = event.dataTransfer.getData("Text").split(',');
         var dm = document.getElementById(offset[2]);
+          
+
+        base1=Math.round(((event.clientX + parseInt(offset[0], 10))-54.5)/76.5);
+        base2=Math.round(((event.clientY + parseInt(offset[1], 10))-54.5)/75.5);
 
         tiles[offset[2][2]-1][0]=offset[2][0];
-        tiles[offset[2][2]-1][1]=(event.clientX + parseInt(offset[0], 10));
-        tiles[offset[2][2]-1][2]=(event.clientY + parseInt(offset[1], 10));
+        tiles[offset[2][2]-1][1]=base2;
+        tiles[offset[2][2]-1][2]=base1;
 
-        
-
-        dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
-        dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+        dm.style.left = base1*76.5 + 54.5 + 'px';
+        dm.style.top = base2*75.5 + 54.5 + 'px';
        
         event.preventDefault();
         return false;
@@ -44,12 +46,11 @@
         return false;
     }
 
-    function getTilesInput(event) {
-      var request = new XMLHttpRequest()
-      request.open("POST","/nextMove", true)
-      var send_data = "Hello World"
-      request.send(send_data)
-    }
+    function sendTiles() {
+    $.post("/nextMove",
+      JSON.stringify(tiles),
+      function(data,status){status;});
+  }
   </script> 
 {% endblock %} 
 {% block body%}
@@ -72,20 +73,12 @@
 {% endfor %}
 
 <!-- Move commit interface -->
-<script>
-  $(document).ready(function(){
-    $("button").click(function(){
-      $.post("/nextMove",
-      JSON.stringify(tiles),
-      function(data,status){
-        alert("Data: " + data + "\nStatus: " + status);
-      });
-    });
-  });
-  </script>
-
-        <button>PLS</button>
-        
+        <form style="position: absolute; left:1410px; top: 100px">
+          Current player: Player {{current_player}}
+          <br>
+          <br>
+          <button style="position: relative; left:12px; top: 0px" onclick="sendTiles()">Commit your move</button>
+        </form>
 
 <!-- Player racks -->    
           {% for letter in racks[current_player] %}
@@ -100,6 +93,7 @@
                     <span class="ScrabbleNumber">{{letter_values[letter]}}</span>
                     </div>
               {%endif%}
-          {% endfor %}  
+          {% endfor %}
+          
           
 {%endblock %}
