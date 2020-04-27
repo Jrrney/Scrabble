@@ -5,7 +5,7 @@ import csv
 import random
 import string
 import time
-
+import json
 import pickle
 
 app = Flask(__name__)
@@ -88,8 +88,7 @@ def startGame():
 def nextMove():
     global game
     if request.method == "POST":
-        data = request.get_data()
-        print(data)
+        move = json.loads(request.get_data())
         game.fill_racks()
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
     else:
