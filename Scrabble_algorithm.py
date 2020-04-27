@@ -39,7 +39,7 @@ def get_left_limit(board, row, column):
     return i
 
 
-def tranpose(array):
+def transpose(array):
     return list(map(list, zip(*array)))
 
 
@@ -203,7 +203,7 @@ def make_best_move(board, rack, dictionary):
     rowMove = evaluate_moves(globalMoves)
 
     # transposed - column moves
-    board = tranpose(board)
+    board = transpose(board)
     cross_checks = get_cross_checks(board, dictionary)
     globalMoves = []
 
@@ -216,11 +216,11 @@ def make_best_move(board, rack, dictionary):
     columnMove = evaluate_moves(globalMoves)
 
     if(len(rowMove[0]) > len(columnMove[0])):
-        board = tranpose(board)
+        board = transpose(board)
         make_move(board, rowMove)
     else:
         make_move(board, columnMove)
-        board = tranpose(board)
+        board = transpose(board)
 
     return board
 

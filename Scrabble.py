@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from Trie import import_dictionary
+from Scrabble_algorithm import get_anchors, get_cross_checks, transpose
 
 import csv
 import random
@@ -14,6 +15,7 @@ app.config.from_pyfile('config.py')
 
 class Game:
     board = [[[]for _ in range(15)] for _ in range(15)]
+    dictionary = None
     number_of_players = 0
     current_player = 0
     racks = [[]]
@@ -45,6 +47,52 @@ class Game:
         "y": 4,
         "z": 10,
     }
+
+    def __init__(self, dictionary, letter_values):
+        self.dictionary = dictionary
+        if(letter_values != None):
+            self.letter_values = letter_values
+
+    def validate_move(self, move):
+
+        cleanMove = [x for x in move if (
+            x[0] != "-" and x[1] >= 0 and x[1] <= 14 and x[2] >= 0 and x[2] <= 14)]
+
+        previous = cleanMove[0]
+        vertical = True
+        word = ""
+
+        if(cleanMove[1][1] == cleanMove[0][1]):
+            vertical = False
+        elif(cleanMove[1][2] == cleanMove[0][2]):
+            vertical = True
+        else:
+            return False
+
+        if(vertical):
+            cleanMove.sort(key=lambda cleanMove: cleanMove[1])
+        else:
+            cleanMove.sort(key=lambda cleanMove: cleanMove[2])
+
+        for item in cleanMove:
+            word += (item[0])
+            if(vertical):
+                if(item[2] != previous[2]):
+                    return False
+            else:
+                if(item[1] != previous[1]):
+                    return False
+
+        # if(dictionary.is_word(word)==False)
+
+        tmpBoard = self.board
+
+        if(vertical):
+            tmpBoard = transpose(tmpBoard)
+
+        anchors = get_anchors(self.board, self.dictionary)
+        cross_checks = get_cross_checks(self.board, self.dictionary)
+        return True
 
     def fill_racks(self):
         self.next_move()
@@ -89,6 +137,8 @@ def nextMove():
     global game
     if request.method == "POST":
         move = json.loads(request.get_data())
+        value = game.validate_move(move)
+        print(value)
         game.fill_racks()
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
     else:
@@ -96,7 +146,9 @@ def nextMove():
 
 
 if (__name__ == "__main__"):
-    game = Game()
-    game.board = [['-'for _ in range(15)] for _ in range(15)]
-    game.import_board("board.csv")
+    dictionaryFile = "DictionaryENG.txt"
+    boardFile = "board.csv"
+    game = Game(import_dictionary(dictionaryFile, ""), None)
+
+    game.import_board(boardFile)
     app.run()
