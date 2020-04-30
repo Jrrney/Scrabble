@@ -55,47 +55,41 @@ class Game:
 
     def validate_move(self, move):
 
-        cleanMove = [x for x in move if (
+        tmp = json.loads(request.get_data())
+
+        cleanMove = [x for x in tmp if (
             x[0] != "-" and x[1] >= 0 and x[1] <= 14 and x[2] >= 0 and x[2] <= 14)]
 
-        previous = cleanMove[0]
-        vertical = True
-        word = ""
-
-        if(cleanMove[1][1] == cleanMove[0][1]):
-            vertical = False
-        elif(cleanMove[1][2] == cleanMove[0][2]):
-            vertical = True
-        else:
+        if (len(cleanMove) == 0):
             return False
 
-        if(vertical):
-            cleanMove.sort(key=lambda cleanMove: cleanMove[1])
-        else:
-            cleanMove.sort(key=lambda cleanMove: cleanMove[2])
+        if(len(cleanMove) > 1):
+            if(cleanMove[1][1] == cleanMove[0][1]):
+                vertical = False
+            elif(cleanMove[1][2] == cleanMove[0][2]):
+                vertical = True
+            else:
+                print("Bending word")
+                return False
+
+            if(vertical):
+                cleanMove.sort(key=lambda cleanMove: cleanMove[1])
+            else:
+                cleanMove.sort(key=lambda cleanMove: cleanMove[2])
 
         for item in cleanMove:
-            word += (item[0])
             if(vertical):
-                if(item[2] != previous[2]):
+                if(item[2] != cleanMove[0][2]):
+                    print("Bending word")
                     return False
             else:
-                if(item[1] != previous[1]):
+                if(item[1] != cleanMove[0][1]):
+                    print("Bending word")
                     return False
 
-        # if(dictionary.is_word(word)==False)
-
-        tmpBoard = self.board
-
-        if(vertical):
-            tmpBoard = transpose(tmpBoard)
-
-        anchors = get_anchors(self.board, self.dictionary)
-        cross_checks = get_cross_checks(self.board, self.dictionary)
         return True
 
     def fill_racks(self):
-        self.next_move()
         if(self.racks == [[]]):
             for j in range(self.number_of_players):
                 rack = []
@@ -113,6 +107,17 @@ class Game:
         if(self.current_player > self.number_of_players):
             self.current_player = 1
 
+        self.fill_racks()
+
+    def initiate_game(self, number_request):
+        if(number_request != ""):
+            number = int(number_request)
+            if(number > 0):
+                self.number_of_players = number
+                self.next_move()
+                return True
+        return False
+
 
 @app.route("/", methods=['POST', 'GET'])
 def startGame():
@@ -120,13 +125,8 @@ def startGame():
     if(game.number_of_players != 0):
         return redirect('/nextMove')
     if request.method == "POST":
-        tmp = request.form['number_of_players']
-        if(tmp != ""):
-            number = int(tmp)
-            if(number > 0):
-                game.number_of_players = number
-                game.fill_racks()
-                return redirect('/nextMove')
+        if(game.initiate_game(request.form['number_of_players'])):
+            return redirect('/nextMove')
         return redirect('/')
     else:
         return render_template('starting_board.html', letter_values=game.letter_values)
@@ -136,10 +136,9 @@ def startGame():
 def nextMove():
     global game
     if request.method == "POST":
-        move = json.loads(request.get_data())
-        value = game.validate_move(move)
+        value = game.validate_move(request.get_data())
         print(value)
-        game.fill_racks()
+        game.next_move()
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)
     else:
         return render_template('game_board.html', board=game.board, letter_values=game.letter_values, current_player=game.current_player, racks=game.racks)

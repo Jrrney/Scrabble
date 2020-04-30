@@ -1,6 +1,16 @@
 import fileinput
 import pickle
-import time
+from time import time
+
+
+def timer(func):
+    def f(*args, **kwargs):
+        before = time()
+        result = func(*args, **kwargs)
+        after = time()
+        print('Time elapsed: '+str(after-before)+" s")
+        return result
+    return f
 
 
 class TrieNode:
@@ -48,6 +58,7 @@ class Trie:
 
 
 # imports a dictionary from txt format and creates Trie file
+@timer
 def import_dictionary(input, output):
     tree = Trie()
 
@@ -65,6 +76,7 @@ def import_dictionary(input, output):
 
 
 # loads a dictionary from a binary file
+@timer
 def load_dictionary(file):
     filehandler = open(file, 'rb')
     dictionary = pickle.load(filehandler)
@@ -78,3 +90,5 @@ def index_to_char(index):
 
 def char_to_index(char):
     return ord(char)-ord('a')
+
+# decorator timer
