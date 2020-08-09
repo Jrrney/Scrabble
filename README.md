@@ -1,18 +1,23 @@
 # Scrabble
-The game of Scrabble implemented in Python with web front-end
+The game of Scrabble.
 
-# Scrabble algorithm
+Back-end Python implementation contains REST API in Flask framework.
+Front-end is design as HTML + CSS website.
 
-For now move evaluation is based on **length of the word**, not offical Scrabble rules
+Code also contains an algorithm to play the game. Further used as an AI opponent
 
-# Lexicon
+## Scrabble algorithm
+
+*For now move evaluation is based on **length of the word**, not offical Scrabble rules*
+
+## Lexicon
 Lexicon used by algorithm is implemented as a Trie - a kind of search tree where the keys are letters of the alphabet. 
 Each node has "isTerminal" marker to distingiush if path from the root to that node forms a complete word. 
 This kind of structure makes search for words very efficient. Whole lexicone in this form has **370 104 wors**.
 
 Credit for the dictionary used in the Trie: [github.com/dwyl](https://github.com/dwyl)  
 
-# Algorithm implementation 
+## Algorithm implementation 
 Implementation is based on a paper by Andrew W. Appel and Guy J. Jacobson
 
 It takes an anchor square and uses a recursive formula to extend the word to the right and left from there. 
