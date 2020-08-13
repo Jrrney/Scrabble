@@ -2,7 +2,7 @@
 The game of Scrabble.
 
 Back-end Python implementation contains REST API in Flask framework.
-Front-end is design as HTML + CSS website.
+Front-end is designed as HTML + CSS website.
 
 Code also contains an algorithm to play the game. Further used as an AI opponent
 
